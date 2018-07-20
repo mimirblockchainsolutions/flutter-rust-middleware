@@ -29,7 +29,7 @@ import Flutter
 
   private func middleWare(result: FlutterResult) {
     let middleWare = MiddleWare();
-    let reslt = middleWare.sayHello(to: "from Rust!");
+    let reslt = middleWare.call(to: "from Rust!");
     print(reslt);
     result(reslt);
   }
