@@ -4,12 +4,12 @@ Boilerplate code to patch Flutter with Rust on iOS and Android.
 
 ## Prerequisites
 
-`rust`
-`flutter`
-`cargo-lipo`
-`Android`
-`Android NDK`
-`Xcode`
+- `rust`
+- `flutter`
+- `cargo-lipo`
+- `Android`
+- `Android NDK`
+- `Xcode`
 
 ## Getting Started
 
@@ -28,11 +28,11 @@ Next, change to the cargo directory
 
 `cd cargo`
 
-and run the build script
+and run the cargo build script
 
 `./build.sh`
 
-finally, you can build the project from the root directory of the project
+finally, you can use flutter to build the project for android or ios from the root directory of the project
 
 ```
 For iOS:
