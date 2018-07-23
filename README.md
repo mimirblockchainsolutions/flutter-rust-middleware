@@ -31,3 +31,10 @@ For iOS:
 For Android:
   flutter build apk
 ```
+
+
+# TODO
+- Change Hello World to JSON string containing method and arguments
+- Deserialize and Serialize on both ends
+- Streamline where possible
+- Turn into flutter library if it's possible to include the cross building process
