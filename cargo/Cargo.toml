@@ -13,3 +13,4 @@ name = "middleware"
 crate-type = ["staticlib", "cdylib", "dylib"]
 
 [dependencies]
+serde_json = "1.0.24"

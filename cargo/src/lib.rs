@@ -1,17 +1,20 @@
+extern crate serde_json;
 use std::os::raw::c_char;
 use std::ffi::{CString, CStr};
 
 #[no_mangle]
-pub extern "C" fn rust_greeting(to: *const c_char) -> *mut c_char {
-    let c_str = unsafe { CStr::from_ptr(to) };
-    let recipient = match c_str.to_str() {
-        Err(_) => "there",
-        Ok(string) => string,
-    };
+pub extern "C" fn rust_greeting(payload: *const c_char) -> *mut c_char {
+    let c_str = unsafe { CStr::from_ptr(payload) };
+    let rslt = handle_input(&c_str);
+    let output = serde_json::to_string(&rslt).expect("always serializes");
+    CString::new(output).unwrap().into_raw()
+}
 
-    CString::new("Hello ".to_owned() + recipient)
-        .unwrap()
-        .into_raw()
+fn handle_input(cstr: &CStr) -> Result<String, String> {
+    match &cstr.to_str() {
+        Err(_) => Ok("Error: No input".to_string()),
+        Ok(_string) => Ok("testing".to_string()),
+    }
 }
 
 #[no_mangle]

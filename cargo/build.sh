@@ -16,3 +16,6 @@ mkdir jniLibs/x86
 ln -s /Users/$USER/Projects/middleware/cargo/target/aarch64-linux-android/release/libmiddleware.so jniLibs/arm64/libmiddleware.so
 ln -s /Users/$USER/Projects/middleware/cargo/target/armv7-linux-androideabi/release/libmiddleware.so jniLibs/armeabi/libmiddleware.so
 ln -s /Users/$USER/Projects/middleware/cargo/target/i686-linux-android/release/libmiddleware.so jniLibs/x86/libmiddleware.so
+
+cd ../../../../ios
+ln -s /Users/$USER/Projects/middleware/cargo/target/universal/release/libmiddleware.a Flutter/libmiddleware.a
