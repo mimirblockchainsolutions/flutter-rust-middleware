@@ -10,7 +10,11 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
 export NDK_HOME=$ANDROID_HOME/ndk-bundle
 ```
-Secondly, you need to run the ndk script to build your compile targets from the root folder of the project
+
+You also need to update the contents of `ndk.sh` and `build.sh` in the cargo folder so the paths
+match your actual project directories
+
+Then, you need to run the ndk script to build your compile targets from the root folder of the project
 
 `./ndk.sh`
 
