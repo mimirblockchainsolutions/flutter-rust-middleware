@@ -21,7 +21,14 @@ class _PlatformChannelState extends State<PlatformChannel> {
   Future<Null> _middleWare() async {
     String middleware;
     try {
-      final String result = await methodChannel.invokeMethod('middleWare');
+      final String result = await methodChannel.invokeMethod(
+        'middleWare',
+        [<String, dynamic>
+          {
+        		"method": "hello-json",
+        		"params": "Nick"
+          }
+        ]);
       middleware = '$result';
     } on PlatformException {
       middleware = 'Failed to call method.';

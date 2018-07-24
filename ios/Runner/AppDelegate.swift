@@ -4,6 +4,7 @@
 
 import UIKit
 import Flutter
+import Foundation
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -18,7 +19,15 @@ import Flutter
     middlewareChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: FlutterResult) -> Void in
       if ("middleWare" == call.method) {
-        self.middleWare(result: result);
+        let jsonResult = call.arguments as! NSArray;
+        let array = jsonResult as? [Any];
+        let argsObject = array?.first;
+        let aaargs = argsObject as? [String: Any];
+        let jsonData = try! JSONSerialization.data(withJSONObject: aaargs!, options: .prettyPrinted);
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String;
+        print(jsonString);
+ 
+        self.middleWare(args: jsonString, result: result);
       } else {
         result(FlutterMethodNotImplemented);
       }
@@ -27,16 +36,9 @@ import Flutter
     return super.application(application, didFinishLaunchingWithOptions: launchOptions);
   }
 
-  private func middleWare(result: FlutterResult) {
-    let request = """
-    {
-      "method" : "hello-json",
-      "params" : "Nick"
-    }
-    """;
+    private func middleWare(args: String, result: FlutterResult) {
     let middleWare = MiddleWare();
-    let reslt = middleWare.call(to: request);
-    print(reslt);
+    let reslt = middleWare.call(to: args);
     result(reslt);
   }
 
