@@ -1,6 +1,15 @@
 package labs.mimir.middleware;
 
 import android.os.Bundle;
+import android.util.Log;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodChannel;
@@ -27,7 +36,12 @@ public class MainActivity extends FlutterActivity {
               @Override
               public void onMethodCall(MethodCall call, Result result) {
                 if (call.method.equals("middleWare")) {
-                  String res = middleWare();
+                  ArrayList argarr = (ArrayList) call.arguments;
+                  Gson gsonBuilder = new GsonBuilder().create();
+                  String args = gsonBuilder.toJson(argarr.get(0));
+
+                  System.out.println(args);
+                  String res = middleWare(args);
 
                   if (res.length() > 0) {
                     result.success(res);
@@ -42,8 +56,8 @@ public class MainActivity extends FlutterActivity {
     );
   }
 
-  private String middleWare() {
+  private String middleWare(String args) {
     MiddleWare m = new MiddleWare();
-    return m.call("from Rust!");
+    return m.call(args);
   }
 }
