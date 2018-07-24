@@ -1,6 +1,12 @@
 extern crate serde_json;
+#[macro_use]
+extern crate serde_derive; // 1.0.70
+extern crate serde; // 1.0.70
 use std::os::raw::c_char;
 use std::ffi::{CString, CStr};
+
+use std::fmt::Debug;
+use serde::Serialize;
 
 // FLOW:
 // app -> request_fuction -> Deserialize
@@ -9,19 +15,48 @@ use std::ffi::{CString, CStr};
 // -> Serialize return value -> send to app
 
 
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(tag = "method", content = "params")]
+#[serde(rename_all = "kebab-case")]
+#[allow(non_camel_case_types)]
+enum Request {
+    Hello_Json(String),
+}
+
+fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<T, E>) -> String {
+    match serde_json::to_string(&rslt) {
+        Ok(serialized) => serialized,
+        Err(_) => {
+            let msg = format!("serialization failed for {:?}", rslt);
+            let err: Result<String, String> = Err(msg);
+            serde_json::to_string(&err).expect("must serialize")
+        }
+    }
+}
+
+fn dispatch(req: Request) -> String {
+    match req {
+        Request::Hello_Json(val) => ser_rslt(hello_json(val)),
+    }
+}
+
+fn hello_json(name: String) -> Result<String, String> {
+    Ok(format!("Hello {}", name))
+}
+
 #[no_mangle]
 pub extern "C" fn request_function(payload: *const c_char) -> *mut c_char {
     let c_str = unsafe { CStr::from_ptr(payload) };
-    let rslt = handle_input(&c_str);
-    let output = serde_json::to_string(&rslt).expect("always serializes");
+    let r_string = c_str.to_string_lossy();
+    let output = match serde_json::from_str(&r_string) {
+        Ok(request) => dispatch(request),
+        Err(error) => {
+            let msg = format!("deserialization failed: {}", error);
+            let err: Result<String, String> = Err(msg);
+            serde_json::to_string(&err).expect("always serializes")
+        }
+    };
     CString::new(output).unwrap().into_raw()
-}
-
-fn handle_input(cstr: &CStr) -> Result<String, String> {
-    match &cstr.to_str() {
-        Err(_) => Ok("Error: No input".to_string()),
-        Ok(_string) => Ok("testing".to_string()),
-    }
 }
 
 #[no_mangle]
