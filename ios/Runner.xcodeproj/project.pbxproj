@@ -20,9 +20,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		BCB54FF121064E7B001B59EC /* libmiddleware.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCB54FEF21064CE1001B59EC /* libmiddleware.a */; };
 		BCD750542102383B001E011F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BCD750532102383B001E011F /* libresolv.tbd */; };
 		BCF030DD21023C2500BF83A8 /* MiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF030DC21023C2500BF83A8 /* MiddleWare.swift */; };
+		BCF4ADE521077638001AFC69 /* libmiddleware.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCB54FEF21064CE1001B59EC /* libmiddleware.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCB54FF121064E7B001B59EC /* libmiddleware.a in Frameworks */,
+				BCF4ADE521077638001AFC69 /* libmiddleware.a in Frameworks */,
 				BCD750542102383B001E011F /* libresolv.tbd in Frameworks */,
 				9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */,
 				3B80C3941E831B6300D905FE /* App.framework in Frameworks */,
