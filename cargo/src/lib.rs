@@ -60,7 +60,7 @@ pub extern "C" fn request_function(payload: *const c_char) -> *mut c_char {
 }
 
 #[no_mangle]
-pub extern "C" fn request_free(s: *mut c_char) {
+pub extern "C" fn function_free(s: *mut c_char) {
     unsafe {
         if s.is_null() {
             return;
