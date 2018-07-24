@@ -28,8 +28,14 @@ import Flutter
   }
 
   private func middleWare(result: FlutterResult) {
+    let request = """
+    {
+      "method" : "hello-json",
+      "params" : "Nick"
+    }
+    """;
     let middleWare = MiddleWare();
-    let reslt = middleWare.call(to: "from Rust!");
+    let reslt = middleWare.call(to: request);
     print(reslt);
     result(reslt);
   }

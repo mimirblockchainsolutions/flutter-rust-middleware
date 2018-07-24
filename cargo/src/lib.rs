@@ -18,9 +18,8 @@ use serde::Serialize;
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(tag = "method", content = "params")]
 #[serde(rename_all = "kebab-case")]
-#[allow(non_camel_case_types)]
 enum Request {
-    Hello_Json(String),
+    HelloJson(String),
 }
 
 fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<T, E>) -> String {
@@ -36,7 +35,7 @@ fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<T, E>) -> S
 
 fn dispatch(req: Request) -> String {
     match req {
-        Request::Hello_Json(val) => ser_rslt(hello_json(val)),
+        Request::HelloJson(val) => ser_rslt(hello_json(val)),
     }
 }
 
