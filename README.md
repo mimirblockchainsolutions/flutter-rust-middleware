@@ -52,7 +52,6 @@ For Android:
 
 
 # TODO
-- Change Hello World to JSON string containing method and arguments
-- Deserialize and Serialize on both ends
+- Deserialize return statement in Dart
 - Streamline where possible
 - Turn into flutter library if it's possible to include the cross building process
