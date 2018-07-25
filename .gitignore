@@ -10,4 +10,8 @@
 GeneratedPluginRegistrant.java
 /NDK
 /cargo/target
-cargo/.cargo/
+cargo/.cargo/config
+.packages
+android/.idea/
+android/app/src/main/jniLibs/
+ios/Flutter/libmiddleware.a
