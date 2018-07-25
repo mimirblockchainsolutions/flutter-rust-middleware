@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
   Future<Null> _middleWare() async {
     String middleware;
     try {
-      final String result = await methodChannel.invokeMethod(
+      final String call = await methodChannel.invokeMethod(
         'middleWare',
         [<String, dynamic>
           {
@@ -29,7 +30,8 @@ class _PlatformChannelState extends State<PlatformChannel> {
         		"params": "Nick"
           }
         ]);
-      middleware = '$result';
+      Map<String, dynamic> result = json.decode(call);
+      middleware = '${result['Ok']}!';
     } on PlatformException {
       middleware = 'Failed to call method.';
     }
