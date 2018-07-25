@@ -1,13 +1,8 @@
 package labs.mimir.middleware;
 
 import android.os.Bundle;
-import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
