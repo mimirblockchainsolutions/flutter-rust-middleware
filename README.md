@@ -52,6 +52,5 @@ For Android:
 
 
 # TODO
-- Deserialize return statement in Dart
 - Streamline where possible
 - Turn into flutter library if it's possible to include the cross building process
