@@ -53,4 +53,5 @@ For Android:
 
 # TODO
 - Streamline where possible
+- Remove all unnecessary files except for configs with necessary linking pointers to built libraries and dependencies
 - Turn into flutter library if it's possible to include the cross building process
