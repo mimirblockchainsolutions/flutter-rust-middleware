@@ -19,14 +19,6 @@ export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
 export NDK_HOME=$ANDROID_HOME/ndk-bundle
 ```
-And change your cargo/.cargo/config file and change <project_dir> to the location of this project on your computer
-```
-[target.aarch64-linux-android]
-ar = "/<project_dir>/flutter-rust-middleware/NDK/arm64/bin/aarch64-linux-android-ar"
-linker = "/<project_dir>/middleware/NDK/arm64/bin/aarch64-linux-android-clang"
-
-```
-
 
 Then, you need to run the ndk script to build your compile targets from the root folder of the project
 
