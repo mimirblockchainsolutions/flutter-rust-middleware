@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - middleware (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios-release`)
+  - middleware (from `.symlinks/plugins/middleware/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios-release"
+  middleware:
+    :path: ".symlinks/plugins/middleware/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  middleware: bacf4b9bd99b329a44eb92c1bea68111f6e8b25b
+
+PODFILE CHECKSUM: 7765ea4305eaab0b3dfd384c7de11902aa3195fd
+
+COCOAPODS: 1.5.3
