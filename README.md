@@ -15,9 +15,14 @@ Boilerplate code to patch Flutter with Rust on iOS and Android.
 
 The first thing you need to do is set a few environment variables to help the process.
 ```
-export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+Mac:
+  export ANDROID_HOME=/Users/$USER/Library/Android/sdk
 
-export NDK_HOME=$ANDROID_HOME/ndk-bundle
+  export NDK_HOME=$ANDROID_HOME/ndk-bundle
+  
+Linux:
+
+
 ```
 
 Then, you need to run the ndk script to build your compile targets from the root folder of the project
