@@ -41,7 +41,7 @@ finally, you can use flutter to build the project for android or ios from the ro
 
 ```
 For iOS:
-  flutter build iOS
+  flutter build ios
 
 For Android:
   flutter build apk
