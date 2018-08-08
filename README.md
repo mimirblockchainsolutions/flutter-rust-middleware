@@ -14,6 +14,8 @@ Boilerplate code to patch Flutter with Rust on iOS and Android.
 ## Getting Started
 
 The first thing you need to do is set a few environment variables to help the process.
+**note: these need to be the location of the directories or your variables should reflect 
+the directories they are actually located at
 ```
 Mac:
   export ANDROID_HOME=/Users/$USER/Library/Android/sdk
