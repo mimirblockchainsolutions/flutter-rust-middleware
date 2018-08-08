@@ -8,7 +8,7 @@ cargo build --target i686-linux-android --release
 
 if [[ $(rustc --print target-list) = *"apple-ios"* ]]; then
     cargo lipo --release
-    ln -s $PWD/target/universal/release/libmiddleware.a ../../../../ios/Flutter/libmiddleware.a
+    ln -s $PWD/target/universal/release/libmiddleware.a ../ios/Flutter/libmiddleware.a
 fi
 
 JNILIBS_DIR=$(cd ../android/app/src/main; pwd)/jniLibs
