@@ -27,7 +27,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
         [<String, dynamic>
           {
         		"method": "hello-json",
-        		"params": "Nick"
+        		"params": "From Rust"
           }
         ]);
       Map<String, dynamic> result = json.decode(call);
