@@ -1,5 +1,5 @@
 # Middleware
-###(***This code is still in development, bugs may be present***)
+(***This code is still in development, bugs may be present***)
 
 Boilerplate code to patch Flutter with Rust on iOS and Android.
 
