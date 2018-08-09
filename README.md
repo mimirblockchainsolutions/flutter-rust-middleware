@@ -54,6 +54,9 @@ For Android:
   flutter build apk
 ```
 
+### Android Studio
+
+When you see the popup **Android Gradle Plugin Update Reccomended** click ***Don't remind me again for this project***
 
 # TODO
 - Streamline where possible
