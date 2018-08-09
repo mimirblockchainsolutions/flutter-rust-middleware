@@ -42,7 +42,8 @@ and run the cargo build script
 `./build.sh`
 
 finally, you can use **flutter** to build the project for android or ios from the root directory of the project:
-***you must build with flutter before opening with android studio or Xcode***
+
+***(you must build with flutter before opening with android studio or Xcode)***
 
 ```
 For iOS:
