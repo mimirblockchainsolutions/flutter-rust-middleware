@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.middleware"
+        applicationId "labs.mimir.middleware"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
