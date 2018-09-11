@@ -31,11 +31,9 @@ public class MainActivity extends FlutterActivity {
               @Override
               public void onMethodCall(MethodCall call, Result result) {
                 if (call.method.equals("middleWare")) {
-                  ArrayList argarr = (ArrayList) call.arguments;
                   Gson gsonBuilder = new GsonBuilder().create();
-                  String args = gsonBuilder.toJson(argarr.get(0));
+                  String args = gsonBuilder.toJson(call.arguments);
 
-                  System.out.println(args);
                   String res = middleWare(args);
 
                   if (res.length() > 0) {

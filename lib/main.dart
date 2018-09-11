@@ -18,18 +18,20 @@ class _PlatformChannelState extends State<PlatformChannel> {
       const MethodChannel('mimir.labs/middleware');
 
   String _middleware = 'Call a method.';
+  static String method = 'hello-json';
+  static String params = 'Nicolas';
+  Map funcall = {
+  'method': method,
+  'params': params
+  };
 
   Future<Null> _middleWare() async {
     String middleware;
     try {
       final String call = await methodChannel.invokeMethod(
         'middleWare',
-        [<String, dynamic>
-          {
-        		"method": "hello-json",
-        		"params": "From Rust"
-          }
-        ]);
+        funcall
+        );
       Map<String, dynamic> result = json.decode(call);
       middleware = '${result['Ok']}!';
     } on PlatformException {

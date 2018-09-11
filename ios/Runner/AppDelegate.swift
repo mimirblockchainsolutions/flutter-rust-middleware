@@ -19,13 +19,9 @@ import Foundation
     middlewareChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: FlutterResult) -> Void in
       if ("middleWare" == call.method) {
-        let jsonResult = call.arguments as! NSArray;
-        let array = jsonResult as? [Any];
-        let argsObject = array?.first;
-        let aaargs = argsObject as? [String: Any];
-        let jsonData = try! JSONSerialization.data(withJSONObject: aaargs!, options: .prettyPrinted);
+
+        let jsonData = try! JSONSerialization.data(withJSONObject: call.arguments!, options: .prettyPrinted);
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String;
-        print(jsonString);
  
         self.middleWare(args: jsonString, result: result);
       } else {
