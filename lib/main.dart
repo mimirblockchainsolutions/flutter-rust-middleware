@@ -15,23 +15,17 @@ class PlatformChannel extends StatefulWidget {
 
 class _PlatformChannelState extends State<PlatformChannel> {
   static const MethodChannel methodChannel =
-      const MethodChannel('mimir.labs/middleware');
+  const MethodChannel('mimir.labs/middleware');
 
   String _middleware = 'Call a method.';
-  static String method = 'hello-json';
-  static String params = 'Nicolas';
-  Map funcall = {
-  'method': method,
-  'params': params
-  };
 
-  Future<Null> _middleWare() async {
+  Future<Null> _middleWare(funcall) async {
     String middleware;
     try {
       final String call = await methodChannel.invokeMethod(
-        'middleWare',
-        funcall
-        );
+          'middleWare',
+          funcall
+      );
       Map<String, dynamic> result = json.decode(call);
       middleware = '${result['Ok']}!';
     } on PlatformException {
@@ -56,7 +50,10 @@ class _PlatformChannelState extends State<PlatformChannel> {
                 padding: const EdgeInsets.all(16.0),
                 child: new RaisedButton(
                   child: const Text('Call'),
-                  onPressed: _middleWare,
+                  onPressed: () => _middleWare({
+                    'method': 'hello-json',
+                    'params': 'Nicolas is the greatest'
+                  }),
                 ),
               ),
             ],
