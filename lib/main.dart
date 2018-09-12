@@ -52,7 +52,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
                   child: const Text('Call'),
                   onPressed: () => _middleWare({
                     'method': 'hello-json',
-                    'params': 'Nicolas is the greatest'
+                    'params': 'You should change me'
                   }),
                 ),
               ),
