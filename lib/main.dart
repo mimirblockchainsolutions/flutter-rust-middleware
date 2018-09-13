@@ -15,7 +15,7 @@ class MiddleWare {
   const MethodChannel('mimir.labs/middleware');
   // execute a command to the rust backend, we don't know when it will complete so we use a future
    static Future<String> execute(Command cmd) async {
-     // hold the output
+     // store the output
     String middleware;
     // let's give it a try
     try {
@@ -63,7 +63,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   Future<void> middleware() async {
     String middleware = await MiddleWare.execute(
-        new Command('hello-json', 'Woahnahnah')
+        new Command('hello-json', 'I am running from a rust program')
     );
     setState(() {
       _middleware = middleware;
@@ -77,18 +77,30 @@ class _WalletScreenState extends State<WalletScreen> {
         title: Text('Wallet Screen'),
       ),
       body: Center(
-        child: new Column(
+        child:  Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            new Column(
+             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text(_middleware, key: const Key('Response')),
-                new Padding(
+                 Text(_middleware, key: const Key('Response')),
+                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: new RaisedButton(
+                  child:  RaisedButton(
                     child: const Text('Call'),
                     onPressed: () => middleware(),
+                  ),
+                ),
+                 Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child:  RaisedButton(
+                    child: const Text('First Screen'),
+                     onPressed: () {
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => FirstScreen()),
+                       );
+                     },
                   ),
                 ),
               ],
