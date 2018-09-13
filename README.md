@@ -5,7 +5,7 @@ Boilerplate code to patch Flutter with Rust on iOS and Android.
 
 ## Prerequisites
 
-- [rust](https://www.rust-lang.org)
+- [Rust](https://www.rust-lang.org)
 - [Flutter](https://github.com/flutter/flutter)
 - [cargo-lipo](https://github.com/TimNN/cargo-lipo)
 - [Android Studio](https://developer.android.com/studio/)
