@@ -37,6 +37,8 @@ use mimir_crypto::secp256k1::Address;
 #[serde(rename_all = "kebab-case")]
 enum Request {
     ListAccounts,
+    CreateWallet,
+    HelloJson,
 }
 
 
@@ -44,17 +46,29 @@ enum Request {
 #[serde(untagged)]
 enum Response {
     ListAccounts(Vec<String>),
+    CreateWallet(Address),
+    HelloJson(String),
 }
 
-fn list_accounts() -> Result<T, E> {
-    return Ok({
-        "list of accounts"
-    });
+fn list_accounts() -> Result<Response, ()> {
+    Ok(Response::ListAccounts(vec!["test-acct"]))
+}
+
+fn create_wallet() -> Result<Address, Error> {
+    let keys = key::keygen();
+    store::store_keys(&keys)?;
+    Ok(Response::CreateWallet(keys.address))
+}
+
+fn hello_json(name: String) -> Result<String, String> {
+    Ok(format!("Hello {}", name))
 }
 
 fn dispatch(req: Request) -> String {
     match req {
-        Request::ListAccounts() => ser_rslt(),
+        Request::ListAccounts() => ser_rslt(list_accounts()),
+        Request::HelloJson(val) => ser_rslt(hello_json(val)),
+        Request::CreateWallet() => ser_rslt(create_wallet().map_err(|e| e.to_string())),
     }
 }
 

@@ -22,4 +22,3 @@ mkdir $JNILIBS_DIR/x86
 ln -snf $PWD/target/aarch64-linux-android/release/libmiddleware.so ${JNILIBS_DIR}/arm64/libmiddleware.so
 ln -snf $PWD/target/armv7-linux-androideabi/release/libmiddleware.so ${JNILIBS_DIR}/armeabi/libmiddleware.so
 ln -snf $PWD/target/i686-linux-android/release/libmiddleware.so ${JNILIBS_DIR}/x86/libmiddleware.so
-

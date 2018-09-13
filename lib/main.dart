@@ -77,7 +77,23 @@ class _WalletScreenState extends State<WalletScreen> {
         title: Text('Wallet Screen'),
       ),
       body: Center(
-
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text(_middleware, key: const Key('Response')),
+                new Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: new RaisedButton(
+                    child: const Text('Call'),
+                    onPressed: () => middleware(),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

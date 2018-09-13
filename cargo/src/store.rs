@@ -5,8 +5,8 @@ use serde_json;
 use std::fs;
 
 /// include path to put keys
-pub fn store_keys(keys: Keys) -> Result<(), Error> {
-    let toml = toml::to_string(&keys)?;
+pub fn store_keys(keys: &Keys) -> Result<(), Error> {
+    let toml = toml::to_string(keys)?;
     fs::write("keys.toml", toml)?;
     Ok(())
 }

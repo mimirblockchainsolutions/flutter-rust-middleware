@@ -11,9 +11,9 @@ use rand;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Keys {
-    public: Public,
+    pub public: Public,
     pub secret: Secret,
-    address: Address,
+    pub address: Address,
 }
 
 #[derive(Deserialize, Debug)]
