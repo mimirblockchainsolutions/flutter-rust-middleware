@@ -8,32 +8,56 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class PlatformChannel extends StatefulWidget {
-  @override
-  _PlatformChannelState createState() => new _PlatformChannelState();
-}
+class MiddleWare {
 
-class _PlatformChannelState extends State<PlatformChannel> {
-  static const MethodChannel methodChannel =
+  static const MethodChannel middlewareChannel =
   const MethodChannel('mimir.labs/middleware');
 
-  String _middleware = 'Call a method.';
-
-  Future<Null> _middleWare(funcall) async {
+   static Future<String> execute(Command cmd) async {
     String middleware;
+    // Errors occurring on the platform side cause invokeMethod to throw
+    // PlatformExceptions.
     try {
-      final String call = await methodChannel.invokeMethod(
+      final String call = await middlewareChannel.invokeMethod(
           'middleWare',
-          funcall
+          <String, dynamic>{
+            'method': cmd.method,
+            'params': cmd.params,
+          }
       );
       Map<String, dynamic> result = json.decode(call);
       middleware = '${result['Ok']}!';
     } on PlatformException {
-      middleware = 'Failed to call method.';
+      middleware = 'Failed to call ${cmd.method}.';
     }
-    setState(() {
-      _middleware = middleware;
-    });
+    return middleware;
+  }
+}
+
+class Command {
+  Command(this.method, this.params);
+
+  final String method;
+  final dynamic params;
+}
+
+
+class WalletScreen extends StatefulWidget {
+  @override
+  _WalletScreenState createState() => new _WalletScreenState();
+}
+
+class _WalletScreenState extends State<WalletScreen> {
+
+  String _middleware = 'Call a method.';
+
+  Future<void> middleware() async {
+     String middleware =  await MiddleWare.execute(
+        new Command('hello-json', 'Woahnahnah')
+      );
+     setState(() {
+       _middleware = middleware;
+     });
   }
 
   @override
@@ -50,10 +74,7 @@ class _PlatformChannelState extends State<PlatformChannel> {
                 padding: const EdgeInsets.all(16.0),
                 child: new RaisedButton(
                   child: const Text('Call'),
-                  onPressed: () => _middleWare({
-                    'method': 'hello-json',
-                    'params': 'You should change me'
-                  }),
+                  onPressed: () => middleware(),
                 ),
               ),
             ],
@@ -64,6 +85,58 @@ class _PlatformChannelState extends State<PlatformChannel> {
   }
 }
 
+//void main() {
+//  runApp(new MaterialApp(home: new PlatformChannel()));
+//}
+
 void main() {
-  runApp(new MaterialApp(home: new PlatformChannel()));
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: FirstScreen(),
+  ));
 }
+
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Screen'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('Launch screen'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Screen"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WalletScreen()),
+            );
+          },
+          child: Text('Wallet screen'),
+        ),
+      ),
+    );
+  }
+}
+
