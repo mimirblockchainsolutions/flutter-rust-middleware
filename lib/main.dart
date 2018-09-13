@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 
 // Our middleware class
 class MiddleWare {
-  // the methhod channel will talk to ios/android
+  // the method channel will talk to ios/android
   static const MethodChannel middlewareChannel =
   const MethodChannel('mimir.labs/middleware');
   // execute a command to the rust backend, we don't know when it will complete so we use a future
@@ -31,7 +31,7 @@ class MiddleWare {
       );
       // decode the output
       Map<String, dynamic> result = json.decode(call);
-      // store the output string to return to the frontnd
+      // store the output string to return to the frontend
       middleware = '${result['Ok']}!';
 
     } on PlatformException {
@@ -43,14 +43,13 @@ class MiddleWare {
   }
 }
 
-// our command class lets us pass any method and paramater to the rust backend
+// our command class lets us pass any method and parameter to the rust backend
 class Command {
   Command(this.method, this.params);
 
   final String method;
   final dynamic params;
 }
-
 
 class PlatformChannel extends StatefulWidget {
   @override
