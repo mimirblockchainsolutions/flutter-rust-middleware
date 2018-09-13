@@ -16,3 +16,12 @@ crate-type = ["staticlib", "cdylib", "dylib"]
 serde_json = "1.0.24"
 serde_derive = "1.0.70"
 serde = "1.0.70"
+structopt = "0.2.10"
+toml = "0.4.2"
+mimir-crypto = { git = "https://github.com/mimirblockchainsolutions/mimir-bridge-alpha.git", branch = "refactor" }
+mimir-common = { git = "https://github.com/mimirblockchainsolutions/mimir-bridge-alpha.git", branch = "refactor" }
+rand = "0.4.2"
+rlp = "0.2.1"
+reqwest = "0.8.6"
+ring = "0.12.1"
+rust-crypto = "0.2.36"

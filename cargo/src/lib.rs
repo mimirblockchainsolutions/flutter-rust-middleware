@@ -8,6 +8,23 @@ use std::ffi::{CString, CStr};
 use std::fmt::Debug;
 use serde::Serialize;
 
+extern crate mimir_crypto;
+extern crate mimir_common;
+extern crate rand;
+extern crate toml;
+extern crate rlp;
+extern crate reqwest;
+extern crate ring;
+extern crate crypto;
+mod transact;
+mod transaction;
+mod store;
+mod error;
+mod key;
+
+use structopt::StructOpt;
+use mimir_common::types::{Bytes, U256};
+use mimir_crypto::secp256k1::Address;
 // FLOW:
 // app -> request_fuction -> Deserialize
 // -> send Dispatcher function with provided arguments
@@ -19,10 +36,29 @@ use serde::Serialize;
 #[serde(tag = "method", content = "params")]
 #[serde(rename_all = "kebab-case")]
 enum Request {
-    HelloJson(String),
+    ListAccounts,
 }
 
-fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<T, E>) -> String {
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(untagged)]
+enum Response {
+    ListAccounts(Vec<String>),
+}
+
+fn list_accounts() -> Result<T, E> {
+    return Ok({
+        "list of accounts"
+    });
+}
+
+fn dispatch(req: Request) -> String {
+    match req {
+        Request::ListAccounts() => ser_rslt(),
+    }
+}
+
+fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<Response, E>) -> String {
     match serde_json::to_string(&rslt) {
         Ok(serialized) => serialized,
         Err(_) => {
@@ -31,16 +67,6 @@ fn ser_rslt<T: Serialize + Debug, E: Serialize + Debug>(rslt: Result<T, E>) -> S
             serde_json::to_string(&err).expect("must serialize")
         }
     }
-}
-
-fn dispatch(req: Request) -> String {
-    match req {
-        Request::HelloJson(val) => ser_rslt(hello_json(val)),
-    }
-}
-
-fn hello_json(name: String) -> Result<String, String> {
-    Ok(format!("Hello {}", name))
 }
 
 #[no_mangle]
