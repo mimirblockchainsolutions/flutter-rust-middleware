@@ -8,32 +8,42 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Our middleware class
 class MiddleWare {
-
+  // the methhod channel will talk to ios/android
   static const MethodChannel middlewareChannel =
   const MethodChannel('mimir.labs/middleware');
-
+  // execute a command to the rust backend, we don't know when it will complete so we use a future
    static Future<String> execute(Command cmd) async {
+     // hold the output
     String middleware;
-    // Errors occurring on the platform side cause invokeMethod to throw
-    // PlatformExceptions.
+    // let's give it a try
     try {
+      // invoke the method and store the output in a sting
       final String call = await middlewareChannel.invokeMethod(
+        // our method call to the ios/android backend is static to make life a little easier
           'middleWare',
+          // we pass the actual method and arguments to the backend
           <String, dynamic>{
             'method': cmd.method,
             'params': cmd.params,
           }
       );
+      // decode the output
       Map<String, dynamic> result = json.decode(call);
+      // store the output string to return to the frontnd
       middleware = '${result['Ok']}!';
+
     } on PlatformException {
+      // oops
       middleware = 'Failed to call ${cmd.method}.';
     }
+    // return the result to the frontend
     return middleware;
   }
 }
 
+// our command class lets us pass any method and paramater to the rust backend
 class Command {
   Command(this.method, this.params);
 
@@ -42,12 +52,12 @@ class Command {
 }
 
 
-class WalletScreen extends StatefulWidget {
+class PlatformChannel extends StatefulWidget {
   @override
-  _WalletScreenState createState() => new _WalletScreenState();
+  _PlatformChannelState createState() => new _PlatformChannelState();
 }
 
-class _WalletScreenState extends State<WalletScreen> {
+class _PlatformChannelState extends State<PlatformChannel> {
 
   String _middleware = 'Call a method.';
 
@@ -86,5 +96,5 @@ class _WalletScreenState extends State<WalletScreen> {
 }
 
 void main() {
- runApp(new MaterialApp(home: new WalletScreen()));
+ runApp(new MaterialApp(home: new PlatformChannel()));
 }
