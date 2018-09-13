@@ -85,58 +85,6 @@ class _WalletScreenState extends State<WalletScreen> {
   }
 }
 
-//void main() {
-//  runApp(new MaterialApp(home: new PlatformChannel()));
-//}
-
 void main() {
-  runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: FirstScreen(),
-  ));
+ runApp(new MaterialApp(home: new WalletScreen()));
 }
-
-class FirstScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First Screen'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Launch screen'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondScreen()),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class SecondScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Screen"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WalletScreen()),
-            );
-          },
-          child: Text('Wallet screen'),
-        ),
-      ),
-    );
-  }
-}
-
