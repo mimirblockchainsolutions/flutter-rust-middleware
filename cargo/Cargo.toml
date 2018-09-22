@@ -22,6 +22,6 @@ mimir-crypto = { git = "https://github.com/mimirblockchainsolutions/mimir-bridge
 mimir-common = { git = "https://github.com/mimirblockchainsolutions/mimir-bridge-alpha.git", branch = "refactor" }
 rand = "0.4.2"
 rlp = "0.2.1"
-reqwest = "0.8.6"
+# reqwest = "0.8.6"
 ring = "0.12.1"
 rust-crypto = "0.2.36"

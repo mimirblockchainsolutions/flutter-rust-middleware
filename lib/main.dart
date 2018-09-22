@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
 // Our middleware class
 class MiddleWare {
@@ -50,6 +51,15 @@ class Command {
   final String method;
   final dynamic params;
 }
+
+
+sample_call() {
+  var url = "https://b2i.io";
+  http.post(url, body: {"method": "eth_blockNumber", "params": "{}"})
+      .then((response) {
+    print("Response status: ${response.statusCode}");
+    print("Response body: ${response.body}");
+  });}
 
 
 class WalletScreen extends StatefulWidget {

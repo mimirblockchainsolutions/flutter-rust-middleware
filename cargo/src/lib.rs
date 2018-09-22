@@ -1,3 +1,4 @@
+#[macro_use]
 extern crate serde_json;
 #[macro_use]
 extern crate serde_derive; // 1.0.70
@@ -13,7 +14,7 @@ extern crate mimir_common;
 extern crate rand;
 extern crate toml;
 extern crate rlp;
-extern crate reqwest;
+//extern crate reqwest;
 extern crate ring;
 extern crate crypto;
 mod transact;
