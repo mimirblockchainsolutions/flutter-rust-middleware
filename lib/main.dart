@@ -4,10 +4,9 @@
 
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 
 // Our middleware class
 class MiddleWare {
@@ -53,15 +52,6 @@ class Command {
 }
 
 
-sample_call() {
-  var url = "https://b2i.io";
-  http.post(url, body: {"method": "eth_blockNumber", "params": "{}"})
-      .then((response) {
-    print("Response status: ${response.statusCode}");
-    print("Response body: ${response.body}");
-  });}
-
-
 class WalletScreen extends StatefulWidget {
   @override
   _WalletScreenState createState() => new _WalletScreenState();
@@ -79,6 +69,18 @@ class _WalletScreenState extends State<WalletScreen> {
       _middleware = middleware;
     });
   }
+
+  void send() {
+    var data={"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1};
+    http.post(
+      'https://nn54wgx9u0.execute-api.us-east-1.amazonaws.com/prod/mainnet',
+      body: data;
+    )
+    .then((resp) {
+      _middleware = resp.body;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +100,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child:  RaisedButton(
                     child: const Text('Call'),
-                    onPressed: () => middleware(),
+                    onPressed: () => send(),
                   ),
                 ),
                  Padding(
